@@ -1,11 +1,24 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors({}))
 const { createTodo, updateTodo } = require("./types");  // Assuming these are Zod schemas
 const { todo } = require("./db");  // Your Mongoose or database model
 
 // Middleware to parse incoming JSON
 app.use(express.json());
 
+// get - fetching
+// post/put - storing
+// delete - removing
+// update - modify
+
+app.get("/",(req,res)=>{
+  return res.status(200).json({
+    success:true,
+    message:"server working"
+  })
+})
 // Create a new todo
 app.post("/todo", async function (req, res) {
   const createPayload = req.body;
@@ -68,5 +81,5 @@ app.put("/completed", async function (req, res) {
 
 // Start the server on port 3000
 app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is running on port http//localhost:3000");
 });
